@@ -64,8 +64,8 @@ if __name__ == "__main__":
     net_ig.to(device)
 
     for epoch in [args.multiplier*i for i in range(args.start_iter, args.end_iter+1)]:
-        ckpt = f"{args.artifacts}/models/{epoch}.pth"
-        checkpoint = torch.load(ckpt, map_location=lambda a,b: a)
+        #ckpt = './models/%d.pth'%(epoch)
+        checkpoint = torch.load(args.ckpt, map_location=lambda a,b: a)
         # Remove prefix `module`.
         checkpoint['g'] = {k.replace('module.', ''): v for k, v in checkpoint['g'].items()}
         net_ig.load_state_dict(checkpoint['g'])
